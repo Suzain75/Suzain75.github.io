@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Suzain Bidri, Full Stack Developer</title>
+<meta name="description" content="Full stack developer in Doha building payment and KYC onboarding flows with React and FastAPI.">
+<meta name="theme-color" content="#170610">
+<style>
+:root{
+  --ivory:#fbf3e6; --muted:#d6c3c7; --gold:#e9c98a; --gold2:#d9a441; --wine:#8a1538; --mint:#8fe3d2;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+  --sans:"Avenir Next","Segoe UI",system-ui,Helvetica,Arial,sans-serif;
+  --mrz:"OCR B","Courier New",monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;color:var(--ivory);font:1rem/1.65 var(--sans);background:#170610}
+a{color:var(--gold)}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.bg{position:fixed;inset:0;z-index:-1;overflow:hidden;background:#170610}
+.blob{position:absolute;border-radius:50%;filter:blur(90px);animation:drift 24s ease-in-out infinite alternate}
+.b1{width:560px;height:560px;left:-160px;top:-120px;background:#8a1538;opacity:.6}
+.b2{width:440px;height:440px;right:-120px;top:22%;background:#d9a441;opacity:.22;animation-delay:-8s}
+.b3{width:480px;height:480px;left:30%;bottom:-220px;background:#1f8f84;opacity:.3;animation-delay:-15s}
+@keyframes drift{to{transform:translate(70px,50px) scale(1.18)}}
+main,.bar{max-width:1000px;margin:0 auto;padding:0 22px}
+.bar{display:flex;justify-content:space-between;align-items:center;padding-top:20px;padding-bottom:10px}
+.bar b{font:700 1.2rem var(--serif)}
+h1,h2,h3{font-family:var(--serif);line-height:1.12;margin:0 0 .5em}
+h1{font-size:clamp(2.3rem,5.6vw,3.9rem);letter-spacing:-.02em}
+h1 em{color:var(--gold);font-style:italic}
+h2{font-size:1.7rem}h3{font-size:1.2rem;margin:0}
+
+.hero{display:grid;grid-template-columns:1fr minmax(320px,450px);gap:40px;align-items:center;padding:30px 0 64px}
+.lead{font-size:1.12rem;color:var(--muted);max-width:30em}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin:26px 0 12px}
+.hint{font-size:.9rem;color:var(--muted);opacity:.8;margin:0}
+.btn{display:inline-block;border:1px solid transparent;font:700 1rem var(--sans);padding:11px 22px;border-radius:999px;text-decoration:none;cursor:pointer;
+  color:#2a0a16;background:linear-gradient(135deg,#f6e2b0,var(--gold2));transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 26px -8px rgba(233,180,80,.7)}
+.btn.ghost{background:transparent;color:var(--ivory);border-color:rgba(233,201,138,.55)}
+.btn[disabled]{visibility:hidden}
+
+.stage{position:relative;padding:20px 14px}
+.pill{position:absolute;z-index:2;padding:4px 14px;border-radius:999px;font-size:.82rem;font-weight:700;color:var(--ivory);
+  background:rgba(255,255,255,.1);border:1px solid rgba(233,201,138,.4);backdrop-filter:blur(8px);animation:float 6s ease-in-out infinite}
+.p1{top:-4px;left:2px}.p2{top:30px;right:-6px;animation-delay:-2s}.p3{bottom:34px;left:-6px;animation-delay:-4s}.p4{bottom:-4px;right:12px;animation-delay:-1s}
+@keyframes float{50%{transform:translateY(-10px)}}
+
+.card{position:relative;overflow:hidden;aspect-ratio:1.586/1;border-radius:18px;padding:18px 20px;
+  background:
+   repeating-radial-gradient(circle at 14% 118%,transparent 0 6px,rgba(233,201,138,.28) 6px 7px),
+   repeating-radial-gradient(circle at 90% -30%,transparent 0 8px,rgba(233,201,138,.18) 8px 9px),
+   linear-gradient(135deg,#7d1434,#3a0b1d 62%,#5c1131);
+  border:1px solid rgba(233,201,138,.6);box-shadow:0 28px 60px -20px rgba(138,21,56,.9),0 0 0 6px rgba(233,201,138,.06);
+  transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .15s}
+.card::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(circle at var(--mx,30%) var(--my,15%),rgba(255,255,255,.34),transparent 45%),
+   linear-gradient(115deg,rgba(110,230,215,.14),rgba(220,130,230,.12),rgba(255,215,120,.16))}
+.card::after{content:"";position:absolute;left:0;right:0;top:-45%;height:45%;pointer-events:none;
+  background:linear-gradient(transparent,rgba(143,227,210,.5),transparent);animation:scan 1.5s .5s ease-in-out forwards}
+@keyframes scan{to{top:105%}}
+.ctitle{display:flex;justify-content:space-between;align-items:center;font-size:.72rem;color:var(--gold);font-weight:700;margin-bottom:10px}
+.chip{width:38px;height:28px;border-radius:6px;position:relative;background:linear-gradient(135deg,#f6e2b0,#b98a3e)}
+.chip::before{content:"";position:absolute;inset:5px 8px;border:1px solid rgba(80,50,10,.55);border-radius:3px}
+.chip::after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(80,50,10,.55)}
+.cbody{display:flex;gap:16px}
+.photo{flex:none;width:27%;aspect-ratio:3/4;border-radius:8px;display:grid;place-items:center;font:700 1.9rem var(--serif);color:#3a0b1d;
+  background:linear-gradient(160deg,#f6e2b0,#b98a3e);box-shadow:inset 0 0 0 2px rgba(255,255,255,.25)}
+.fields{display:grid;gap:6px;font-size:.9rem;min-width:0}
+.fields span{display:block;font-size:.64rem;color:#e0c590;line-height:1.1}
+.fields b{line-height:1.2}
+.mrz{position:absolute;left:20px;right:20px;bottom:12px;font:9px/1.35 var(--mrz);letter-spacing:.06em;color:var(--gold);opacity:.8;white-space:nowrap;overflow:hidden}
+.stamp{position:absolute;right:14px;top:44%;border:3px solid var(--mint);color:var(--mint);font:800 1.2rem var(--sans);letter-spacing:.14em;
+  padding:2px 12px;border-radius:6px;opacity:0;background:rgba(23,6,16,.55);box-shadow:0 0 22px rgba(143,227,210,.55);animation:thump .35s 2.1s cubic-bezier(.2,1.6,.4,1) forwards}
+@keyframes thump{from{opacity:0;transform:rotate(-11deg) scale(2)}to{opacity:1;transform:rotate(-11deg) scale(1)}}
+
+.flow{background:rgba(255,255,255,.06);border:1px solid rgba(233,201,138,.25);border-radius:22px;padding:28px;margin-bottom:60px;backdrop-filter:blur(16px)}
+.stepper{display:flex;gap:8px;margin:0 0 26px;padding:0;list-style:none}
+.stepper li{flex:1}
+.stepper button{all:unset;box-sizing:border-box;cursor:pointer;display:block;width:100%;border-top:4px solid rgba(255,255,255,.16);padding-top:8px;font-size:.9rem;color:var(--muted)}
+.stepper button:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.stepper [aria-selected=true]{border-color:var(--gold);color:var(--ivory);font-weight:700}
+.stepper .done{border-color:var(--mint);color:var(--ivory)}
+.stepper i{font-style:normal;font-weight:700}
+.stepper .done i{font-size:0}.stepper .done i::before{content:"\2713";font-size:.9rem;color:var(--mint)}
+.panel{animation:rise .45s ease both}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.proj{background:rgba(255,255,255,.07);border:1px solid rgba(233,201,138,.22);border-top:3px solid var(--gold);border-radius:14px;padding:20px;transition:transform .25s,box-shadow .25s}
+.proj:hover{transform:translateY(-4px);box-shadow:0 16px 34px -16px rgba(233,180,80,.5)}
+.proj.big{grid-column:1/-1;border-top-color:var(--mint)}
+.status{float:right;font-size:.78rem;font-weight:700;color:var(--mint);background:rgba(143,227,210,.12);padding:2px 10px;border-radius:999px}
+.proj p{margin:.5em 0;color:var(--muted)}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 0;padding:0;list-style:none}
+.tags li{font-size:.8rem;padding:2px 10px;border-radius:999px;background:rgba(233,201,138,.14);color:var(--gold)}
+.mini{display:flex;gap:8px;margin:14px 0 4px}
+.mini span{flex:1;font-size:.78rem;color:var(--muted);border-top:4px solid rgba(255,255,255,.18);padding-top:4px}
+.mini .ok{border-color:var(--mint);color:var(--ivory)}
+.job{border-left:3px solid var(--gold);padding-left:20px;position:relative}
+.job::before{content:"";position:absolute;left:-9px;top:4px;width:15px;height:15px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 5px rgba(233,201,138,.2)}
+.meta{color:var(--muted);font-size:.9rem;margin:.2em 0 .6em}
+ul.tight{margin:.4em 0 0;padding-left:1.2em;color:var(--muted)}
+.skills h3{font-size:1rem;color:var(--gold);margin:18px 0 8px}.skills h3:first-of-type{margin-top:0}
+.skills .tags li{font-size:.92rem;padding:5px 14px;color:var(--ivory);background:rgba(255,255,255,.09);border:1px solid rgba(233,201,138,.3)}
+.nav{display:flex;justify-content:space-between;margin-top:26px}
+label{display:block;font-weight:600;margin:14px 0 4px}
+input,textarea{width:100%;font:inherit;padding:11px 14px;border:1px solid rgba(233,201,138,.4);border-radius:12px;background:rgba(255,255,255,.08);color:var(--ivory)}
+.sent{margin-top:12px;color:var(--mint);font-weight:600}
+.sent.err{color:#ffb4a8}
+.busy{opacity:.6;cursor:wait}
+footer{max-width:1000px;margin:0 auto;padding:0 22px 40px;color:var(--muted);font-size:.9rem}
+
+@media (max-width:760px){
+  .hero{grid-template-columns:1fr;gap:26px}
+  .grid{grid-template-columns:1fr}
+  .stepper button{font-size:.76rem}
+  .flow{padding:20px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .blob,.pill,.panel{animation:none}.card{transform:none;transition:none}.card::after{display:none}
+  .stamp{animation:none;opacity:1;transform:rotate(-11deg)}
+}
+</style>
+</head>
+<body>
+<div class="bg" aria-hidden="true"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
+<div class="bar"><b>Suzain Bidri</b><a href="https://github.com/Suzain75">GitHub</a></div>
+<main>
+  <section class="hero">
+    <div>
+      <h1>I build the screens where people <em>prove who they are.</em></h1>
+      <p class="lead">Full stack developer in Doha. I build React payment flows and KYC onboarding that feel clear and safe, plus the FastAPI and PostgreSQL behind them. Check my ID, then walk through my work the way a customer walks through onboarding.</p>
+      <div class="cta">
+        <a class="btn" href="#flow" id="work">See my work</a>
+        <button class="btn ghost" id="hello" type="button">Say hello</button>
+      </div>
+      <p class="hint">Tip: move your mouse over the card.</p>
+    </div>
+    <div class="stage">
+      <span class="pill p1">React</span><span class="pill p2">KYC</span><span class="pill p3">FastAPI</span><span class="pill p4">Fintech</span>
+      <div class="card" id="card" aria-label="Developer ID card for Suzain Bidri">
+        <div class="ctitle"><span>Developer identity card</span><div class="chip"></div></div>
+        <div class="cbody">
+          <div class="photo" aria-hidden="true">SB</div><!-- swap for <img src="me.jpg" alt=""> -->
+          <div class="fields">
+            <div><span>Surname</span><b>Bidri</b></div>
+            <div><span>Given name</span><b>Suzain</b></div>
+            <div><span>Role</span><b>Full stack developer</b></div>
+            <div><span>Based in</span><b>Doha, Qatar</b></div>
+          </div>
+        </div>
+        <div class="stamp">VERIFIED</div>
+        <div class="mrz" aria-hidden="true">ID&lt;&lt;BIDRI&lt;&lt;SUZAIN&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;<br>FULLSTACK&lt;DEV&lt;&lt;REACT&lt;&lt;KYC&lt;&lt;DOHA&lt;&lt;2026</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="flow" id="flow" aria-label="Onboarding walkthrough">
+    <ol class="stepper" role="tablist">
+      <li><button role="tab" id="t0"><i>1</i> Proof of work</button></li>
+      <li><button role="tab" id="t1"><i>2</i> Work history</button></li>
+      <li><button role="tab" id="t2"><i>3</i> Skills</button></li>
+      <li><button role="tab" id="t3"><i>4</i> Submit</button></li>
+    </ol>
+
+    <div class="panel" role="tabpanel" aria-labelledby="t0">
+      <h2>Proof of work</h2>
+      <div class="grid">
+        <article class="proj big">
+          <span class="status">Building in public</span>
+          <h3>KYC onboarding demo</h3>
+          <p>A step-by-step identity check like the ones banks and money apps use, with Next and Back between forms. Every step is a Git commit.</p>
+          <div class="mini"><span class="ok">&#10003; Details</span><span class="ok">&#10003; Address</span><span>ID upload (next)</span></div>
+          <ul class="tags"><li>React</li><li>Vite</li><li>JavaScript</li></ul>
+          <p><a href="https://github.com/Suzain75/kyc-demo">View the code on GitHub</a></p>
+        </article>
+        <article class="proj">
+          <span class="status">In progress</span>
+          <h3>RemitCompare</h3>
+          <p>Compares fees and exchange rates for sending money from Qatar to India, the USA, Saudi Arabia, and Pakistan.</p>
+          <ul class="tags"><li>FastAPI</li><li>PostgreSQL</li><li>React</li><li>TypeScript</li></ul>
+        </article>
+        <article class="proj">
+          <span class="status">Full-stack</span>
+          <h3>Job Tracker</h3>
+          <p>A full-stack app for tracking job applications, with a tested API.</p>
+          <ul class="tags"><li>FastAPI</li><li>PostgreSQL</li><li>React</li><li>pytest</li></ul>
+        </article>
+      </div>
+    </div>
+
+    <div class="panel" role="tabpanel" aria-labelledby="t1">
+      <h2>Work history</h2>
+      <div class="job">
+        <h3>Frontend Developer Intern, Rivera Money Inc</h3>
+        <p class="meta">Mumbai, India. 2 January to 30 April 2025 (4 months)</p>
+        <ul class="tight">
+          <li>Built React.js screens for payment flows and KYC onboarding.</li>
+          <li>Worked on PCI-DSS compliance for payment screens.</li>
+          <li>Developed and managed a web application for a blockchain protocol.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="panel skills" role="tabpanel" aria-labelledby="t2">
+      <h2>Skills</h2>
+      <h3>Daily tools</h3>
+      <ul class="tags"><li>React</li><li>JavaScript</li><li>Vite</li><li>Git</li><li>GitHub</li></ul>
+      <h3>Fintech</h3>
+      <ul class="tags"><li>KYC onboarding flows</li><li>Payment screens</li><li>PCI-DSS compliance work</li></ul>
+      <h3>Backend</h3>
+      <ul class="tags"><li>FastAPI</li><li>PostgreSQL</li><li>pytest</li></ul>
+      <h3>Learning now</h3>
+      <ul class="tags"><li>TypeScript</li></ul>
+    </div>
+
+    <div class="panel" role="tabpanel" aria-labelledby="t3">
+      <h2>Submit</h2>
+      <p>Hiring for a full stack role, or have a payments project in mind? Send me a message.</p>
+      <form id="form">
+        <label for="n">Your name</label><input id="n" required autocomplete="name">
+        <label for="e">Your email</label><input id="e" type="email" required autocomplete="email">
+        <label for="m">Message</label><textarea id="m" rows="4" required></textarea>
+        <input type="text" id="hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
+        <p><button class="btn" id="send" type="submit">Submit</button></p>
+        <p class="sent" id="sent" role="status"></p>
+      </form>
+    </div>
+
+    <div class="nav">
+      <button class="btn ghost" id="back" type="button">Back</button>
+      <button class="btn" id="next" type="button">Next</button>
+    </div>
+  </section>
+</main>
+<footer>&copy; 2026 Suzain Bidri</footer>
+
+<script>
+(function () {
+  var $ = function (s) { return document.querySelector(s); };
+  var tabs = [].slice.call(document.querySelectorAll("[role=tab]"));
+  var panels = [].slice.call(document.querySelectorAll(".panel"));
+  var back = $("#back"), next = $("#next"), cur = 0;
+  function go(i) {
+    cur = i;
+    tabs.forEach(function (t, k) {
+      t.setAttribute("aria-selected", k === i);
+      t.classList.toggle("done", k < i);
+    });
+    panels.forEach(function (p, k) { p.hidden = k !== i; });
+    back.disabled = i === 0;
+    next.disabled = i === tabs.length - 1;
+  }
+  tabs.forEach(function (t, k) { t.addEventListener("click", function () { go(k); }); });
+  back.addEventListener("click", function () { go(cur - 1); });
+  next.addEventListener("click", function () { go(cur + 1); });
+  $("#work").addEventListener("click", function () { go(0); });
+  $("#hello").addEventListener("click", function () { go(3); $("#flow").scrollIntoView({ behavior: "smooth" }); });
+  go(0);
+
+  $("#form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    if ($("#hp").value) { return; }
+    var btn = $("#send"), out = $("#sent"), name = $("#n").value.trim();
+    if (btn.classList.contains("busy")) { return; }
+    btn.classList.add("busy"); btn.textContent = "Sending";
+    out.className = "sent"; out.textContent = "";
+    fetch("https://formsubmit.co/ajax/suzainbidri@gmail.com", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify({ name: name, email: $("#e").value, message: $("#m").value, _subject: "Portfolio message from " + name, _template: "table" })
+    }).then(function (r) { return r.json(); }).then(function (d) {
+      if (String(d.success) !== "true") { throw new Error("failed"); }
+      out.textContent = "Thank you, " + name + "! Your message was sent. I\u2019ll get back to you soon.";
+      $("#form").reset();
+    }).catch(function () {
+      out.className = "sent err";
+      out.textContent = "Sorry, that didn\u2019t go through. Please email me directly at suzainbidri@gmail.com.";
+    }).then(function () { btn.classList.remove("busy"); btn.textContent = "Submit"; });
+  });
+
+  var card = $("#card");
+  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    card.addEventListener("pointermove", function (e) {
+      var r = card.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+      card.style.setProperty("--ry", (x - .5) * 14 + "deg");
+      card.style.setProperty("--rx", (.5 - y) * 10 + "deg");
+      card.style.setProperty("--mx", x * 100 + "%");
+      card.style.setProperty("--my", y * 100 + "%");
+    });
+    card.addEventListener("pointerleave", function () {
+      ["--rx", "--ry", "--mx", "--my"].forEach(function (p) { card.style.removeProperty(p); });
+    });
+  }
+})();
+</script>
+</body>
+</html>
